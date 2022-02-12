@@ -53,7 +53,7 @@ public class Main {
         int a = 15, b = 20;
         System.out.println("a,b (before call): " + a + "," + b);
         ob.meth(a,b);
-        System.out.println("a,b (before call): " + a + "," + b);
+        System.out.println("a,b (after call): " + a + "," + b);
     }
 }
 ```
@@ -77,7 +77,7 @@ public class Main {
 	    Test ob = new Test(15, 20);
         System.out.println("a,b (before call): " + ob.a + "," + ob.b);
         ob.meth(ob);
-        System.out.println("a,b (before call): " + ob.a + "," + ob.b);
+        System.out.println("a,b (after call): " + ob.a + "," + ob.b);
     }
 }
 ```
@@ -185,11 +185,45 @@ Also note that you can't really abuse this propery of static functions to get ac
 \# Note:Another access modifier (but not really tho) is `final`. The `final` keyword allows us to create constants. Any final field cannot be modified during runtime.
 
 ## Fucking with Arrays
+Now that we know some stuff about classes, we can fuck with Java's own classes. Take arrays. Arrays are implemented as objects in Java. Every array instance has its own `length` variable. 
 
 
 
+### Nested Classes
 
+* Two classes can be nested. Here say B is nested in A.
+* B has access to all members (even private ones) of A.
+* B does not exist independently of A.
+* Two types of nested classes: *static* (must access non static members of enclosing class through an object) and *non static/inner* (has access to all members without an object).
 
+Here's an example:
+
+```java
+class Outer{
+    int outer_x = 100;
+    void test() {
+        Inner inner = new Inner();
+        inner.display();
+    }
+    class Inner{
+        void display(){
+            System.out.println("display outer_x = "+ outer_x);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.test();
+    }
+}
+```
+Output:
+```
+display outer_x = 100
+```
+Here, the outer class has to access the inner class via an object but the inner class can directly access all members of the Outer class.
 
 
 
