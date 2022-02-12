@@ -58,7 +58,6 @@ Consider the two implementations of the same thing:
 </tr>
 <tr>
 <td>
-<pre>
 ```java
 class BoxWeight extends Box {
     double weight;
@@ -70,7 +69,6 @@ class BoxWeight extends Box {
     }
 }
 ```
-</pre>
 </td>
 <td>
 
