@@ -124,7 +124,13 @@ When a method in a subclass has the **same name and signature** as the one in th
 <table>
 <tr>
 <td>
-Here, we use the fact that a superclass object can reference objects of its subclass to create three versions of one function at runtime. This is how **runtime polymorphism** is practiced in java.
+Here, we use the fact that a superclass object can reference objects of its subclass to create three versions of one function at runtime. This is how <b>runtime polymorphism</b> is practiced in java.The output is shown below:
+
+<pre>
+Inside A's callme method.
+Inside B's callme method.
+Inside C's callme method.
+</pre>
 </td>
 <td>
 
