@@ -51,7 +51,6 @@ So, we can use B as if A's properties also apply to B (except for members that a
 ### Using super
 Consider the two implementations of the same thing:
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <table>
 <tr>
 <th>Without Super</th>
@@ -87,4 +86,43 @@ class BoxWeight extends Box {
 </tr>
 </table>
 
-Here, we used super to essentially tell Java to use the superclass's constructor for variables that belong to it. Besides the betteer look, there's another advantage: it can be used to initialize members of the superclass that may be private. Since we don't have to access it, they can be initialized by the superclass without interference.
+Here, we used super to essentially tell Java to use the superclass's constructor for variables that belong to it. Besides the betteer look, there's another advantage: it can be used to initialize members of the superclass that may be private. Since we don't have to access it, they can be initialized by the superclass without interference. Another use for super is that it can be used like `this` but for referencing the superclass.
+
+We can extend classes to create multilevel heirarchies. `super()` is a little bitch in the sense that it must be the first statement executed in a subclass' constructor. If `super()` is not actually called, the constructor of the lowest subclass calls the constructor of superclasses with void parameters. The code below demonstrates this:
+<table>
+<tr>
+<th>Without Super</th>
+<th>With Super</th>
+</tr>
+<tr>
+<td>
+Class C is a subclass of B which is a subclass of A. When a C object is created in the main method, A's ctor is called followed by B's followed by C's. 
+</td>
+<td>
+
+```java
+class A{
+    A(){
+        System.out.println("Inside A's ctor");
+    }
+}
+class B extends A{
+    B(){
+        System.out.println("Inside B's ctor");
+    }
+}
+class C extends B{
+    C(){
+        System.out.println("Inside C's  ctor");
+    }
+}
+```
+</td>
+</tr>
+</table>
+
+```java
+
+```
+
+
