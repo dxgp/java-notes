@@ -117,8 +117,44 @@ class C extends B{
 </tr>
 </table>
 
+
+### Method Overriding in Heirarchies
+When a method in a subclass has the **same name and signature** as the one in the superclass, it's said to override the method in the superclass. The true power of method overridingg is demonstrated with the concept of *dynamic method dispatch*.
+
+<table>
+<tr>
+<td>
+Here, we use the fact that a superclass object can reference objects of its subclass to create three versions of one function at runtime. This is how **runtime polymorphism** is practiced in java.
+</td>
+<td>
+
 ```java
-
+class A{
+    void callMe(){
+        System.out.println("Inside A's callme method.");
+    }
+}
+class B extends A{
+    void callMe(){
+        System.out.println("Inside B's callme method.");
+    }
+}
+class C extends B{
+    void callMe(){
+        System.out.println("Inside C's callme method.");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        A a = new A();B b = new B();C c = new C();
+        A r;
+        r = a; r.callMe();
+        r = b; r.callMe();
+        r = c; r.callMe();
+    }
+}
 ```
-
+</td>
+</tr>
+</table>
 
