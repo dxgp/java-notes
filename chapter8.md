@@ -91,10 +91,6 @@ Here, we used super to essentially tell Java to use the superclass's constructor
 We can extend classes to create multilevel heirarchies. `super()` is a little bitch in the sense that it must be the first statement executed in a subclass' constructor. If `super()` is not actually called, the constructor of the lowest subclass calls the constructor of superclasses with void parameters. The code below demonstrates this:
 <table>
 <tr>
-<th>Without Super</th>
-<th>With Super</th>
-</tr>
-<tr>
 <td>
 Class C is a subclass of B which is a subclass of A. When a C object is created in the main method, A's ctor is called followed by B's followed by C's. 
 </td>
