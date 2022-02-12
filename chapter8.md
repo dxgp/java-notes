@@ -50,11 +50,12 @@ So, we can use B as if A's properties also apply to B (except for members that a
 
 ### Using super
 Consider the two implementations of the same thing:
+
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <table>
 <tr>
-<th>Json 1</th>
-<th>Markdown</th>
+<th>Without Super</th>
+<th>With Super</th>
 </tr>
 <tr>
 <td>
