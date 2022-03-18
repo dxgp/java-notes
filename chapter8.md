@@ -243,4 +243,15 @@ class B extends A{
 </tr>
 </table>
 
+## The Object Class
+The object class is literally the mother of all classes. All classes are subclasses of the `Object` class. The `Object` class defines some methods that are available to all classes:
+
+1. `clone()`: Creates a new object that is the same as the object being cloned.
+2. `equals(Object object)`: Check if one object is equal to another.
+3. `getClass()`: Gets the class of an object ar *runtime*.
+4. `hashCode()`: Returns the hashcode associated with the invoking object.
+5. `notify()`: Resumes the execution of a thread waiting on the invoking object.
+6. `notifyAll()`: Resumes the execution of all threads waiting on the invoking object.
+7. `toString()`: Returns a string describing the object.
+8. `wait()`: Wait on another thread.
 
