@@ -180,6 +180,7 @@ Objects of an abstract class cannot be initialized. However, this does not mean 
 Abstract classes don't need to be completely abstract .They can include some concrete implementation which then makes the implementation of the concrete method in the subclass optional.
 </td>
 <td>
+
 ```java
 abstract class A {
 	abstract void callme();
@@ -202,6 +203,7 @@ class AbstractDemo {
 	}
 }
 ```
+
 </td>
 </tr>
 </table>
