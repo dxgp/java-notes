@@ -55,7 +55,7 @@ To actually catch the exceptions, we use the **try and catch block**. This is il
 <table>
 <tr>
 <td>
-The fact that the exception is called <pre>ArithmeticException</pre> is shown by the stack trace. The program outputs:
+The fact that the exception is called <code>ArithmeticException</code> is shown by the stack trace. The program outputs:
 
 <pre>
 Division by zero attempted
@@ -83,3 +83,33 @@ public class Exc2{
 </td>
 </tr>
 </table>
+
+The goal of a try and catch block should be to make the program continue as smoothly as possible.
+
+To deal with multiple exceptions, we can have more than one catch clause. The key is to remember that once an exception is thrown, catches are inspected one by one until a catch matching the exception is found. All other catches after the matching catch are ignored.
+
+<table>
+<tr>
+<td>
+When you use multiple catch statements, it is important to remember that exception subclasses must come before any of their superclasses. This is because a catch statement that uses a superclass will catch exceptions of that type plus any of its subclasses. Thus, a subclass would never be reached if it came after its superclass. Further, in Java, unreachable code is an error. Hence, this program is <b>erroneous</b>.
+</td>
+<td>
+
+```java
+class SuperSubCatch{
+    public static void main(String[] args){
+        try{
+            int a = 0;
+            int b = 42/a;
+        } catch(Exception e){
+            System.out.println("Generic exception catch");
+        } catch(ArithmeticException e){
+            System.out.println("This is never reached and causes an error");
+        }
+    }
+}
+```
+</td>
+</tr>
+</table>
+
