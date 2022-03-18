@@ -174,7 +174,7 @@ Situations where we want to define a parent class that specifies the methods tha
 <table>
 <tr>
 <td>
-Objects of an abstract class cannot be initialized. However, this does not mean that we cannot create references. Creating a variable of that type without using the `new` keyword to create an object is acceptable for abstract classes.
+Objects of an abstract class cannot be initialized. However, this does not mean that we cannot create references. Creating a variable of that type without using the new keyword to create an object is acceptable for abstract classes.
 
 
 Abstract classes don't need to be completely abstract .They can include some concrete implementation which then makes the implementation of the concrete method in the subclass optional.
@@ -182,6 +182,7 @@ Abstract classes don't need to be completely abstract .They can include some con
 <td>
 
 ```java
+
 abstract class A {
 	abstract void callme();
 	void callmetoo() {
