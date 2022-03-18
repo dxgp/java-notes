@@ -49,3 +49,37 @@ class Exc1 {
 </td>
 </tr>
 </table>
+
+To actually catch the exceptions, we use the **try and catch block**. This is illustrated by the following program:
+
+<table>
+<tr>
+<td>
+The fact that the exception is called <pre>ArithmeticException</pre> is shown by the stack trace. The program outputs:
+
+<pre>
+Division by zero attempted
+After the try catch block
+</pre>
+
+</td>
+<td>
+
+```java
+public class Exc2{
+    public static void main(String[] args){
+        int d,a;
+        try{
+            d = 0;
+            a = 42/d;
+            System.out.println("This won't be printed");
+        } catch (ArithmeticException e){
+            System.out.println("Division by zero attempted");
+        }
+        System.out.println("After the try catch block");
+    }
+}
+```
+</td>
+</tr>
+</table>
