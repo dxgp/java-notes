@@ -216,6 +216,8 @@ class AbstractDemo {
 The final keyword can prevent overriding and inheritance. The error thrown is:
 
 <pre>meth() in B cannot override meth() in A</pre>
+
+Similarly, the final keyword can also prevent inheritance. Also, declaring methods as final can also provide a <b>performance boost</b> because the java compiler then just copies the method into the function that's calling it (sort of like how the preprocessor in c works) which then avoid the overhead required for a method call. A term associated with the final keyword is <b>early binding</b>. This implies that Java resolves the calls to a final method at <i>compile time</i>. (<b>late binding</b> implies resolution at runtime).
 </td>
 <td>
 
@@ -240,4 +242,5 @@ class B extends A{
 </td>
 </tr>
 </table>
+
 
