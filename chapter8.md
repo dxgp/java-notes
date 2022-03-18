@@ -132,7 +132,7 @@ Inside B's callme method.
 Inside C's callme method.
 </pre>
 
-Another important thing to note is that a superclass variable can reference a subclass object. This is demonstrated using the variable r that is declared as an `A` variable but references both `B` and `C` variables.
+Another important thing to note is that a superclass variable can reference a subclass object. This is demonstrated using the variable r that is declared as an A variable but references both B and C variables.
 </td>
 <td>
 
