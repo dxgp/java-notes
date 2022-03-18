@@ -213,7 +213,7 @@ class AbstractDemo {
 <table>
 <tr>
 <td>
-The **final** keyword can prevent overriding and inheritance. The error thrown is:
+The final keyword can prevent overriding and inheritance. The error thrown is:
 
 <pre>meth() in B cannot override meth() in A</pre>
 </td>
