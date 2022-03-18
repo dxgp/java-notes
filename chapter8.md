@@ -212,7 +212,7 @@ class AbstractDemo {
 <td>
 The **final** keyword can prevent overriding and inheritance. The error thrown is:
 
-`meth() in B cannot override meth() in A`
+<pre>meth() in B cannot override meth() in A</pre>
 </td>
 <td>
 ```java
