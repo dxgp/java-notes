@@ -166,3 +166,74 @@ public class Main {
 </tr>
 </table>
 
+
+## Abstract Classes
+
+Situations where we want to define a parent class that specifies the methods that must be implemented but does not specify *how* to implement these methods class for the use of **abstract classes**. These methods that must be implemented by subclasses are referred to as **subclasser responsibility**. Here is an example:
+
+<table>
+<tr>
+<td>
+Objects of an abstract class cannot be initialized. However, this does not mean that we cannot create references. Creating a variable of that type without using the `new` keyword to create an object is acceptable for abstract classes.
+
+
+Abstract classes don't need to be completely abstract .They can include some concrete implementation which then makes the implementation of the concrete method in the subclass optional.
+</td>
+<td>
+```java
+abstract class A {
+	abstract void callme();
+	void callmetoo() {
+		System.out.println("This is a concrete method");
+	}
+}
+
+class B extends A{
+	void callme(){
+		System.out.println("B's implementation of callme.");
+	}
+}
+
+class AbstractDemo {
+	public static void main(String[] args){
+		B b = new B();
+		b.callme();
+		b.callmetoo();
+	}
+}
+```
+</td>
+</tr>
+</table>
+
+## The Final Keyword
+<table>
+<tr>
+<td>
+The **final** keyword can prevent overriding and inheritance. The error thrown is:
+
+`meth() in B cannot override meth() in A`
+</td>
+<td>
+```java
+public class Final{
+    public static void main(String[] args){
+        B b = new B();
+        b.meth();
+    }
+}
+class A{
+    final void meth(){
+        System.out.println("This is a final method.");
+    }
+}
+class B extends A{
+    public void meth(){
+        System.out.println("Illegal");
+    }
+}
+```
+</td>
+</tr>
+</table>
+
