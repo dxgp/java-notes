@@ -218,6 +218,7 @@ The final keyword can prevent overriding and inheritance. The error thrown is:
 <pre>meth() in B cannot override meth() in A</pre>
 </td>
 <td>
+
 ```java
 public class Final{
     public static void main(String[] args){
