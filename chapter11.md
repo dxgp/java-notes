@@ -68,3 +68,73 @@ class CurrentThreadDemo{
 </td>
 </tr>
 </table>
+
+## Creating a Thread
+
+### Method 1: Implementing Runnable
+To implement runnable, a class only needs to implement a single method run as `public void run()`. 
+
+<table>
+<tr>
+<td>
+Here, the main method creates a new thread (using the <code>NewThread</code> constructor which creates a new thread by instantiating an object of type <b>Thread</b>. Also notice how the constructor uses <code>this</code> in the constructor) and calls <code>start()</code> which then calls <code>run()</code>. The output of the program is:
+
+<pre>
+Child thread: Thread[Demo Thread,5,main]
+   Main Thread: 5
+   Child Thread: 5
+   Child Thread: 4
+   Main Thread: 4
+   Child Thread: 3
+   Child Thread: 2
+   Main Thread: 3
+   Child Thread: 1
+   Exiting child thread.
+   Main Thread: 2
+   Main Thread: 1
+   Main thread exiting.
+</pre>
+
+Also, the main thread is the last one to exit because it has to run some cleanup functions.
+</td>
+<td>
+
+```java
+class NewThread implements Runnable{
+    Thread t;
+    NewThread(){
+        t = new Thread(this, "Demo thread");
+        System.out.println("Child thread:" + t);
+    }
+    public void run(){
+        try{
+            for(int i=5; i>0;i--){
+                System.out.println("Child thread: " + i);
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e){
+            System.out.println("Child interrupted");
+        }
+        System.out.println("Exiting child thread");
+    }
+}
+
+class ThreadDemo{
+    public static void main(String[] args){
+        NewThread nt = new NewThread();
+        nt.t.start();
+        try{
+            for(int i=5; i>0;i--){
+                System.out.println("Main thread:"+ i);
+                Thread.sleep(1000);
+            } 
+        } catch (InterrtuptedException e){
+            System.out.println("Main thread interrupted.");
+        }
+        System.out.println("Main thread exiting");
+    }
+}
+```
+</td>
+</tr>
+</table>
