@@ -113,3 +113,70 @@ class SuperSubCatch{
 </tr>
 </table>
 
+
+<table>
+<tr>
+<td>
+Try statements can also be nested. When an exception occurs in a try statement on the "inside", the catch corresponding to the statement is tried. However, if none is found, it moves one level up and tries the catches on the "outside". Here, suppose we supply
+</td>
+<td>
+
+```java
+class NestTry{
+    public static void main(String[] args){
+        try{
+            int a = args.length;
+            int b = 42/a;
+            System.out.println("a = " + a);
+            try{
+                if(a==1){
+                    a = a/(a-a);
+                }
+                if(a==2){
+                    int[] c = {1};
+                    c[42] = 99;
+                }
+            } catch(ArrayIndexOutOfBoundsException e){
+                System.out.println("Array index out of bounds:" + e);
+            }
+        } catch(ArithmeticException e){
+            System.out.println("Divide by 0: " + e);
+        }
+    }
+}
+```
+
+</td>
+</tr>
+</table>
+
+## Throwing Exceptions
+
+The flow of execution stops immediately after a **throw** is encountered. The closest try block is then checked for matching catch clause. If none is found, the default exception handler halts the program and prints the stack trace.
+
+<table>
+<tr>
+<td>
+The <code>throw</code> keyword is used to throw a <code>NullPointerException</code> in this code. Note that an instance of the exception must exist to be thrown.
+</td>
+<td>
+
+```java
+class ThrowDemo{
+    static void demoproc(){
+        try{
+            throw new NullPointerException("demo");
+        } catch (NullPointerException e){
+            System.out.println("Caught inside demoproc");
+        }
+    }
+    public static void main(String[] args){
+        demoproc();
+    }
+}
+```
+</td>
+</tr>
+</table>
+
+
