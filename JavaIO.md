@@ -94,3 +94,39 @@ Some commonly used `File` methods are:
 <td>Returns a <code>File[]</code> array denoting the files in the directory.</td>
 </tr>
 </table>
+
+## Streams
+### Nomenclature
+
+<hr>
+<center>Stream vs Reader/Writer</center>
+<hr>
+
+The contents of a file may be accessed or written via a stream which is a list of data elements presented sequentially. Java provides three vuilt in streams: `System.in`, `System.err` and `System.out`. The `java.io` API provides numberous classe sfor creating, accessing and manipulating streams. It defines two sets of classes for reading and writing streams: those with `Stream` in their name and those with `Reader`/`Writer` in their name.
+
+So, what's the differences between the classes with `Stream` in their name and those with `Reader`/`Writer` in their name?
+
+>While both are sets of classes that define a stream that reads a file, the difference is based on *how the stream is read or written*. The stream classes are used for inputting or outputting all types of binary or byte data while the reader and writer classes are used for inputtting and outputting character/string data. While it may seem like the reader/writer classes are redundant, they're **classes of convenience**. We can write to a file using reader/writer classes without worrying about the byte encoding of the file.
+
+<hr>
+<center>Input vs Output</center>
+<hr>
+
+Most input stream classes have a corresponding output stream class. Similarly, most reader classes have a corresponding writer class. However, there are some exceptions to this. For e.g., the `PrinterWriter` class has no corresponding reader class.
+
+<hr>
+<center>Low Level vs High Level</center>
+<hr>
+
+Streams can also be segmented as low level streams and high level streams. A low level stream comes directly in contact with the source of the data such as a file or an array. Alternatively, high level streams are built on top of another stream using **wrapping**. 
+
+```java
+try (
+BufferedReader bufferedReader = new BufferedReader(new FileReader("zoo-data.txt"))) { 
+    System.out.println(bufferedReader.readLine());
+}
+```
+
+Here, the `FileReader` stream is the low level stream that's fed into the high level `BufferedReader` stream.
+
+

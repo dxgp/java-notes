@@ -138,3 +138,34 @@ class ThreadDemo{
 </td>
 </tr>
 </table>
+
+### Method 2: Extending Thread
+<table>
+<tr>
+<td>
+
+</td>
+<td>
+
+```java
+class NewThread extends Thread{
+    NewThread(){
+        super("Demo thread");
+        System.out.println("Child thread:" + this);
+    }
+    public void run(){
+        try{
+            for(int i = 5; i>0; i--){
+                System.out.println("Child thread:" + i);
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Child interrupted");
+        }
+        System.out.println("Exiting child thread.");
+    }
+}
+```
+</td>
+</tr>
+</table>
