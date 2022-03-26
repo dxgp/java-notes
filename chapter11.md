@@ -267,5 +267,186 @@ class MultiThreadDemo {
 </table>
 
 ## Using isAlive() and join()
+To ensure that the main thread finishes last, we can use `join()`. The `isAlive()` function, when called on a thread returns `true` if the thread on which it is called is still running. 
+
+<table>
+<tr>
+<td>
+Here, we called <code>join()</code> on the three threads. The main thread can only exit once these three joins are done which will only happen once they have finished execution.
+</td>
+<td>
+
+```java
+class NewThread implements Runnable {
+         String name; // name of thread
+         Thread t;
+         NewThread(String threadname) {
+           name = threadname;
+           t = new Thread(this, name);
+           System.out.println("New thread: " + t);
+}
+         // This is the entry point for thread.
+         public void run() {
+           try {
+             for(int i = 5; i > 0; i--) {
+               System.out.println(name + ": " + i);
+               Thread.sleep(1000);
+             }
+           } catch (InterruptedException e) {
+             System.out.println(name + " interrupted.");
+}
+           System.out.println(name + " exiting.");
+         }
+}
+class DemoJoin {
+  public static void main(String[] args) {
+    NewThread nt1 = new NewThread("One");
+    NewThread nt2 = new NewThread("Two");
+    NewThread nt3 = new NewThread("Three");
+    // Start the threads.
+    nt1.t.start();
+    nt2.t.start();
+    nt3.t.start();
+    System.out.println("Thread One is alive: "
+                        + nt1.t.isAlive());
+    System.out.println("Thread Two is alive: "
+                        + nt2.t.isAlive());
+    System.out.println("Thread Three is alive: "
+                        + nt3.t.isAlive());
+    // wait for threads to finish
+    try {
+      System.out.println("Waiting for threads to finish.");
+      nt1.t.join();
+      nt2.t.join();
+      nt3.t.join();
+    } catch (InterruptedException e) {
+      System.out.println("Main thread Interrupted");
+}
+    System.out.println("Thread One is alive: "
+                        + nt1.t.isAlive());
+    System.out.println("Thread Two is alive: "
+                        + nt2.t.isAlive());
+    System.out.println("Thread Three is alive: "
+                        + nt3.t.isAlive());
+    System.out.println("Main thread exiting.");
+  }
+}
+```
+
+</td>
+</tr>
+</table>
+
+> Thread priorities: to set thread priorities, call the `getPriority()` method on the thread and pass the new priority as the argument. The new priority must be within the range [**MIN_PRIORITY**,**MAX_PRIORITY**] which is currently [1,10]. There's another constant called **NORM_PRIORITY**, which is the default priority (currently, this value is 5).
+
+## Synchronization
+There are two methods to synchronize code:
+
+<hr>
+<center>Method 1: Using Synchronized Methods</center>
+<hr>
+Suppose we want to print the following:
+<pre>
+[Hello]
+[Synchronized]
+[World]
+</pre>
+
+Here, the catch is that each of these words must be printed by a separate thread. Say that to achieve this, we write the following code:
+
+<table>
+<tr>
+<td>
+The output of this program will resemble:
+<pre>
+[Hello[Synchronized[World]
+]
+]
+</pre>
+To fix this, we just need to add the <code>synchronized</code> keyword in front of the <code>callme</code> method i.e. 
+<pre>
+synchronized void call(String msg)
+</pre>
+</td>
+<td>
+
+```java
+class Callme{
+    void call(String msg){
+        System.out.print("[" + msg);
+        try{
+            Thread.sleep(1000);
+        } catch(InterruptedException e){
+            System.out.println("Interrupted");
+        }
+        System.out.println("]");
+    }
+}
+class Caller implements Runnable{
+    String msg;
+    Callme target;
+    Thread t;
+    public Caller(Callme targ, String s){
+        target = targ;
+        msg = s;
+        t = new Thread(this);
+    }
+    public void run(){
+        target.call(msg);
+    }
+}
+class Synch{
+    public static void main(String[] args){
+        Callme target = new Callme();
+        // make the shared object same i.e. target
+        Caller ob1 = new Caller(target, "Hello");
+        Caller ob2 = new Caller(target, "Synchronized");
+        Caller ob3 = new Caller(target, "World");
+        ob1.t.start();
+        ob2.t.start();
+        ob3.t.start();
+        try{
+            ob1.t.join();
+            ob2.t.join();
+            ob3.t.join();
+        } catch (InterruptedException e){
+            System.out.println("Interrupted");
+        }
+    }
+}
+```
+
+</td>
+</tr>
+</table>
+
+<hr>
+<center>Method 2: Using Synchronized Statement</center>
+<hr>
+
+This can be best explained using code. Here's how we can achieve the same effect as the above code using the `synchronized` statement:
+
+Just change `public void run()` from:
+
+```java
+public void run(){
+    target.call(msg);
+}
+```
+To:
+```java
+public void run(){
+    synchronized(target){
+        target.call(msg);
+    }
+}
+```
+
+## Interthread Communication
+Java provides three methods to facilitate interthread communication (all three are implemented as final and so, all threads have them). These three methods can only be called from a synchronized context:
+
+1. `wait()`: Tells the calling thread to give up the monitor and go to sleep until some othher thread enters the same monitor and calls `notify()` or `notifyAll()`.
+2. `notify()`: Wakes up a thread that called `wait()` on the same object.
+3. `notifyAll()`: Wakes up all the threads that called `wait()` on the same object.
 
 

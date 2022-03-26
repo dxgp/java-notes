@@ -180,3 +180,94 @@ class ThrowDemo{
 </table>
 
 
+### The throws Clause
+If a method is capable of throwing an exception that it does not handle, it must warn the callers by adding a `throws` keyword in the declaration (except for exceptions of type `Error`, `RuntimeException` or any of their subclasses). Take the following program:
+
+```java
+class ThrowsDemo{
+    static void throwOne(){
+        System.out.println("Inside throwOne");
+        throw new IllegalAccessException("demo");
+    }
+    public static void main(String[] args){
+        throwOne();
+    }
+}
+```
+
+This code won't compile until two changes are made:
+1. We must add a `throws IllegalAccessException()` clause to the function definition.
+2. Try and catch block must be added to `main` to handle the exception.
+
+So, this would look like:
+
+```java
+class ThrowsDemo{
+    static void throwOne() throws IllegalAccessException{
+        System.out.println("Inside throwOne");
+        throw new IllegalAccessException("demo");
+    }
+    public static void main(String[] args){
+        try{
+            throwOne();
+        } catch(IllegalAccessException e){
+            System.out.println("Caught:"+e);
+        }
+        
+    }
+}
+```
+
+### The finally Keyword
+`finally` creates a block of code that is executed after the try/catch blocks. Whether or not an exception is thrown, the `finally` block will be executed. Note that **the finally clause is optional**.
+
+## Creating Exception Subclasses
+Self defined exceptions are defined as subclasses of `Exception`, which does not have any methods of its own but is itself a subclass of `Throwable` which provides a few methods.
+
+<table>
+<tr>
+<td>
+The output produced by this code is:
+<pre>
+Called compute(1)
+Normal exit
+Called compute(20)
+Caught MyException[20]
+</pre>
+</td>
+<td>
+
+```java
+class MyException extends Exception{
+    private int detail;
+    MyException(int a){
+        detail = a;
+    }
+    public String toString(){
+        return "MyException[" + detail + "]";
+    }
+}
+class ExceptionDemo{
+    static void compute(int a) throws MyException{
+        System.out.println("Called compute(" + a + ")");
+        if(a>10){
+            throw new MyException(a);
+        }
+        System.out.println("Normal Exit");
+    }
+    public static void main(String[] args){
+        try{
+            compute(1);
+            compute(20);
+        } catch (MyException e){
+            System.out.println("Caught:" + e);
+        }
+    }
+}
+```
+
+</td>
+</tr>
+</table>
+
+## Chained Exceptions
