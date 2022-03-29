@@ -129,4 +129,31 @@ BufferedReader bufferedReader = new BufferedReader(new FileReader("zoo-data.txt"
 
 Here, the `FileReader` stream is the low level stream that's fed into the high level `BufferedReader` stream.
 
+## Stream Base Classes
+Java defines 4 abstract classes that are parents of all stream classes:
+1. `InputStream`
+2. `OutputStream`
+3. `Reader`
+4. `Writer`
+
+Here are some examples:
+
+```java
+new BufferedInputStream(new FileReader("zoo-data.txt"));
+new BufferedWriter(new FileOutputStream("zoo-data.txt"));
+new ObjectInputStream(new FileOutputStream("zoo-data.txt")); 
+new BufferedInputStream(new InputStream());
+```
+
+None of these will compile. Why? 
+1. Feeding a `Reader` stream to an `InputStream`
+2. Feeding an `OutputStream` to a `Writer` stream.
+3. Feeding an `OutputStream` to an `InputStream`.
+4. Trying to instantiate an object of an abstract class i.e. `InputStream`.
+
+## Stream Operations
+1. **Closing**
+2. **Flushing**
+3. **Marking**
+
 
