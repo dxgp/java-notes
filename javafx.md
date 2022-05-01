@@ -167,7 +167,7 @@ class Main extends Application{
 </td>
 <td>
 The output comes out to be: <br>
-<img src="images/btnExample.png" width="60%"></img>
+<img src="images/btnExample.png" width="80%"></img>
 </td>
 </tr>
 </table>
