@@ -117,7 +117,57 @@ public void start(Stage newStage){
 </td>
 
 <td>
-<img src="images/example1.png"></img>
+<img src="images/example1.png" width="60%"></img>
+</td>
+</tr>
+</table>
+
+
+Note here that while the `init()` and `stop()` methods are important, they are not *necessary* i.e. the program compiles without them too.
+
+Now, we can move on to an application that uses a single button to print "Hello, Application":
+
+<table>
+<tr>
+<td>
+
+```java
+import javafx.application.Application; // base javafx application class
+import javafx.stage.Stage; // base stage class
+import javafx.scene.Scene; // base scene class
+import javafx.scene.control.Button; // adding button
+import javafx.scene.layout.StackPane; // adding layout
+import javafx.event.EventHandler; // is a collection class for events
+import javafx.event.ActionEvent; // creating the actual even handler
+
+class Main extends Application{
+    public static void main(String[] args){
+        launch(args);
+    }
+    public void start(Stage primaryStage){
+        Button btn = new Button();
+        btn.setText("Click me");
+        btn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                System.out.println("Hello, Application");
+            }
+        }); // inline event handler
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        Scene primaryScene = new Scene(root, 300, 250);
+        primaryStage.setTitle("Button Example"); 
+        primaryStage.setScene(primaryScene);
+        
+    }
+}
+
+```
+
+</td>
+<td>
+The output comes out to be: <br>
+<img src="images/btnExample.png" width="60%"></img>
 </td>
 </tr>
 </table>
