@@ -172,6 +172,189 @@ The output comes out to be: <br>
 </tr>
 </table>
 
+Next, we try to create a simple form:
+
+<table>
+<tr>
+<td>
+
+```java
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
+
+public class Main extends Application{
+    public static void main(String[] args){
+        launch(args);
+    }
+    public void start(Stage primaryStage){
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        Scene primaryScene = new Scene(grid, 300, 275);
+        Text sceneTitle = new Text("Welcome");
+        Label userText = new Label("Username");
+        Label passText = new Label("Password");
+        TextField userField = new TextField();
+        PasswordField passField = new PasswordField();
+        sceneTitle.setFont("Verdana", FontWeight.EXTRA_BOLD, 20);
+        grid.add(sceneTitle, 0, 0, 2, 1); // (col, row, colspan, rowspan)
+        grid.add(userText, 0, 1);
+        grid.add(passText, 0, 2);
+        grid.add(userField, 1, 1);
+        grid.add(passField, 1, 2);
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle("Form");
+        primaryStage.show();
+    }
+}
+```
+
+</td>
+<td>
+<img src="images/formExample.png" width="80%"></img>
+</td>
+</tr>
+</table>
+
+## Adding a Sign In Button
+
+
+<table>
+<tr>
+<td>
+
+```java
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.*;
+import javafx.stage.Stage;
+
+public class Main extends Application{
+    public static void main(String[] args){
+        launch(args);
+    }
+    public void start(Stage primaryStage){
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        Scene primaryScene = new Scene(grid, 300, 275);
+        Text sceneTitle = new Text("Welcome");
+        Label userText = new Label("Username");
+        Label passText = new Label("Password");
+        TextField userField = new TextField();
+        PasswordField passField = new PasswordField();
+        sceneTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 20));
+        grid.add(sceneTitle, 0, 0, 2, 1);
+        grid.add(userText, 0, 1);
+        grid.add(passText, 0, 2);
+        grid.add(userField, 1, 1);
+        grid.add(passField, 1, 2);
+        //grid.setGridLinesVisible(true);
+        Button btn = new Button("Sign In");
+        HBox hbBtn = new HBox(10); // spacing between horizontal elements
+        
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(btn);
+        grid.add(hbBtn, 1, 4);
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle("Form");
+        primaryStage.show();
+    }
+}
+```
+
+</td>
+<td>
+<img src="images/formExample2.png" width="80%"></img>
+</td>
+</tr>
+</table>
+
+However, this sign in button is not functional. To add some functionality, we need event handling like so:
+
+<table>
+<tr>
+<td>
+
+```java
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.*;
+import javafx.stage.Stage;
+
+public class Main extends Application{
+    public static void main(String[] args){
+        launch(args);
+    }
+    public void start(Stage primaryStage){
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        Scene primaryScene = new Scene(grid, 300, 275);
+        Text sceneTitle = new Text("Welcome");
+        Label userText = new Label("Username");
+        Label passText = new Label("Password");
+        TextField userField = new TextField();
+        PasswordField passField = new PasswordField();
+        sceneTitle.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 20));
+        grid.add(sceneTitle, 0, 0, 2, 1);
+        grid.add(userText, 0, 1);
+        grid.add(passText, 0, 2);
+        grid.add(userField, 1, 1);
+        grid.add(passField, 1, 2);
+        //grid.setGridLinesVisible(true);
+        Button btn = new Button("Sign In");
+        HBox hbBtn = new HBox(10); // spacing between horizontal elements
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(btn);
+        grid.add(hbBtn, 1, 4);
+        final Text actiontarget = new Text();
+        grid.add(actiontarget, 1, 6);
+        btn.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                actiontarget.setFill(Color.FIREBRICK);
+                actiontarget.setText("Sign in button pressed");
+            }
+        });
+        primaryStage.setScene(primaryScene);
+        primaryStage.setTitle("Form");
+        primaryStage.show();
+    }
+}
+```
+
+</td>
+<td>
+<img src="images/before.png" width="60%"></img>
+<img src="images/after.png" width="60%"></img>
+</td>
+</tr>
+</table>
+
 
 
 
